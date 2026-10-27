@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Project Report — IT4048 | Chirag Jain</title>
+  <style>
+    /* ── Print & Screen base ── */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      font-size: 11pt;
+      color: #1a1a1a;
+      background: #f4f4f4;
+      line-height: 1.6;
+    }
+
+    /* ── Page wrapper ── */
+    .page {
+      max-width: 800px;
+      margin: 30px auto;
+      background: #fff;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.12);
+    }
+
+    /* ── Header / Cover ── */
+    .cover {
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+      color: #fff;
+      padding: 48px 40px 36px;
+      text-align: center;
+      position: relative;
+    }
+    .cover::after {
+      content: '';
+      display: block;
+      width: 80px;
+      height: 4px;
+      background: linear-gradient(90deg, #6c63ff, #00d4aa);
+      margin: 20px auto 0;
+      border-radius: 2px;
+    }
+    .cover .badge {
+      display: inline-block;
+      background: rgba(108,99,255,0.3);
+      border: 1px solid rgba(108,99,255,0.6);
+      color: #a89eff;
+      font-size: 9pt;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 4px 14px;
+      border-radius: 20px;
+      margin-bottom: 18px;
+    }
+    .cover h1 {
+      font-size: 22pt;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      margin-bottom: 6px;
+    }
+    .cover h2 {
+      font-size: 13pt;
+      font-weight: 400;
+      color: #00d4aa;
+      margin-bottom: 24px;
+    }
+    .cover-meta {
+      display: flex;
+      justify-content: center;
+      gap: 32px;
+      flex-wrap: wrap;
+      margin-top: 20px;
+    }
+    .cover-meta div {
+      text-align: center;
+    }
+    .cover-meta .label {
+      font-size: 8pt;
+      color: #8899aa;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      display: block;
+      margin-bottom: 3px;
+    }
+    .cover-meta .value {
+      font-size: 10pt;
+      font-weight: 600;
+      color: #e0e0e0;
+    }
+
+    /* ── Body ── */
+    .body {
+      padding: 36px 40px;
+    }
+
+    /* ── Section ── */
+    .section {
+      margin-bottom: 32px;
+    }
+    .section-title {
+      font-size: 13pt;
+      font-weight: 700;
+      color: #0f3460;
+      border-left: 4px solid #6c63ff;
+      padding-left: 12px;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .section-title .num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #6c63ff, #00d4aa);
+      color: #fff;
+      font-size: 9pt;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    /* ── Info Table ── */
+    .info-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 10.5pt;
+    }
+    .info-table td {
+      padding: 9px 14px;
+      border: 1px solid #e8e8e8;
+    }
+    .info-table td:first-child {
+      background: #f8f7ff;
+      font-weight: 600;
+      color: #3d3580;
+      width: 35%;
+    }
+    .info-table tr:nth-child(even) td:first-child { background: #f0f8f5; color: #1a6b55; }
+
+    /* ── Paragraph ── */
+    p { margin-bottom: 10px; color: #333; font-size: 10.5pt; }
+
+    /* ── Tech Table ── */
+    .tech-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 10pt;
+    }
+    .tech-table th {
+      background: linear-gradient(135deg, #6c63ff, #5a52e0);
+      color: #fff;
+      padding: 9px 14px;
+      text-align: left;
+      font-weight: 600;
+      font-size: 9.5pt;
+    }
+    .tech-table td {
+      padding: 8px 14px;
+      border-bottom: 1px solid #eee;
+      vertical-align: top;
+    }
+    .tech-table tr:nth-child(even) td { background: #fafafa; }
+    .tech-table tr:last-child td { border-bottom: none; }
+
+    /* ── Project Cards ── */
+    .project-card {
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+      padding: 16px 18px;
+      margin-bottom: 14px;
+      border-left: 4px solid #6c63ff;
+      background: #fafafa;
+    }
+    .project-card:nth-child(2) { border-left-color: #00d4aa; }
+    .project-card:nth-child(3) { border-left-color: #ff6b9d; }
+    .project-card:nth-child(4) { border-left-color: #ffa94d; }
+
+    .project-card h4 {
+      font-size: 11pt;
+      font-weight: 700;
+      color: #1a1a2e;
+      margin-bottom: 5px;
+    }
+    .project-card p {
+      font-size: 10pt;
+      color: #555;
+      margin-bottom: 8px;
+    }
+    .project-card .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 8px;
+    }
+    .project-card .tag {
+      background: rgba(108,99,255,0.1);
+      border: 1px solid rgba(108,99,255,0.25);
+      color: #5a52e0;
+      font-size: 8.5pt;
+      padding: 2px 9px;
+      border-radius: 12px;
+      font-weight: 500;
+    }
+    .project-card .github-link {
+      font-size: 9.5pt;
+      color: #0f3460;
+      font-weight: 600;
+    }
+    .project-card .github-link span { color: #888; font-weight: 400; }
+
+    /* ── Screenshot placeholder ── */
+    .screenshot-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 8px;
+    }
+    .screenshot-box {
+      border: 2px dashed #c5bfff;
+      border-radius: 8px;
+      height: 130px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: #f8f7ff;
+      color: #8880cc;
+      font-size: 9pt;
+      text-align: center;
+      gap: 6px;
+    }
+    .screenshot-box .icon { font-size: 22pt; }
+
+    /* ── Links section ── */
+    .links-box {
+      background: linear-gradient(135deg, #f8f7ff, #f0fdf9);
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 16px 20px;
+    }
+    .link-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      margin-bottom: 10px;
+      font-size: 10.5pt;
+    }
+    .link-row:last-child { margin-bottom: 0; }
+    .link-label {
+      font-weight: 700;
+      color: #3d3580;
+      min-width: 120px;
+    }
+    .link-url {
+      color: #0f3460;
+      word-break: break-all;
+    }
+
+    /* ── Declaration ── */
+    .declaration {
+      background: #fff9f0;
+      border: 1px solid #ffd09b;
+      border-radius: 8px;
+      padding: 14px 18px;
+      font-size: 10pt;
+      color: #5a4000;
+    }
+
+    /* ── Signature ── */
+    .signature {
+      margin-top: 36px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+    .signature-block {
+      text-align: center;
+    }
+    .signature-line {
+      width: 180px;
+      border-top: 1.5px solid #333;
+      margin-bottom: 4px;
+    }
+    .signature-label {
+      font-size: 9pt;
+      color: #666;
+    }
+
+    /* ── Footer ── */
+    .report-footer {
+      background: #f8f7ff;
+      border-top: 1px solid #e0e0e0;
+      padding: 14px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 8.5pt;
+      color: #888;
+    }
+
+    /* ── Print Styles ── */
+    @media print {
+      body { background: #fff; }
+      .page {
+        margin: 0;
+        box-shadow: none;
+        border-radius: 0;
+        max-width: 100%;
+      }
+      .no-print { display: none; }
+      .screenshot-box {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+      .cover {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+    }
+
+    /* ── Print Button ── */
+    .print-btn {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: linear-gradient(135deg, #6c63ff, #00d4aa);
+      color: #fff;
+      border: none;
+      padding: 10px 22px;
+      border-radius: 24px;
+      font-size: 10pt;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 4px 14px rgba(108,99,255,0.4);
+      z-index: 999;
+    }
+    .print-btn:hover { opacity: 0.9; transform: translateY(-1px); }
+  </style>
+</head>
+<body>
+
+  <!-- Print to PDF button (hidden when printing) -->
+  <button class="print-btn no-print" onclick="window.print()">🖨️ Save as PDF</button>
+
+  <div class="page">
+
+    <!-- ══════════ COVER ══════════ -->
+    <div class="cover">
+      <div class="badge">IT4048 — Version Control with Git and GitHub</div>
+      <h1>Personal Portfolio Website</h1>
+      <h2>Short Project Report</h2>
+      <div class="cover-meta">
+        <div>
+          <span class="label">Student Name</span>
+          <span class="value">Chirag Jain</span>
+        </div>
+        <div>
+          <span class="label">Enrollment No.</span>
+          <span class="value">202503103510309</span>
+        </div>
+        <div>
+          <span class="label">Course</span>
+          <span class="value">B.Tech CSE (Cyber Security)</span>
+        </div>
+        <div>
+          <span class="label">Submission Date</span>
+          <span class="value">October 2026</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════ BODY ══════════ -->
+    <div class="body">
+
+      <!-- 1. Student Info -->
+      <div class="section">
+        <div class="section-title"><span class="num">1</span> Student Information</div>
+        <table class="info-table">
+          <tr><td>Student Name</td><td>Chirag Jain</td></tr>
+          <tr><td>Enrollment Number</td><td>202503103510309</td></tr>
+          <tr><td>Course / Branch</td><td>B.Tech — Computer Science &amp; Engineering (Cyber Security)</td></tr>
+          <tr><td>Subject Code</td><td>IT4048</td></tr>
+          <tr><td>Subject Name</td><td>Version Control with Git and GitHub</td></tr>
+          <tr><td>File Naming Format</td><td>GitHub_202503103510309_ChiragJain</td></tr>
+          <tr><td>GitHub Username</td><td>chiragjain017</td></tr>
+          <tr><td>Email</td><td>25amtics309@gmail.com</td></tr>
+        </table>
+      </div>
+
+      <!-- 2. Objective -->
+      <div class="section">
+        <div class="section-title"><span class="num">2</span> Objective of the Project</div>
+        <p>
+          The objective of this project is to design and develop a fully responsive <strong>Personal Portfolio Website</strong>
+          that highlights my skills, projects, achievements, and contact information, and to deploy it live using
+          <strong>GitHub Pages</strong>.
+        </p>
+        <p>
+          This project demonstrates practical knowledge of HTML, CSS, and JavaScript for building interactive web interfaces,
+          as well as the use of <strong>Git and GitHub</strong> for version control, collaboration, and web deployment —
+          core competencies of the IT4048 course.
+        </p>
+        <p>
+          The portfolio serves as a professional digital presence that showcases my academic and technical journey as a
+          B.Tech CSE (Cyber Security) student.
+        </p>
+      </div>
+
+      <!-- 3. Technologies Used -->
+      <div class="section">
+        <div class="section-title"><span class="num">3</span> Technologies Used</div>
+        <table class="tech-table">
+          <thead>
+            <tr><th>Technology / Tool</th><th>Purpose</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>HTML5</strong></td><td>Semantic page structure — sections, nav, forms, footer</td></tr>
+            <tr><td><strong>CSS3</strong></td><td>Styling, dark theme, responsive layout (Flexbox &amp; Grid), animations</td></tr>
+            <tr><td><strong>JavaScript (Vanilla)</strong></td><td>Typing animation, particle canvas, scroll effects, form validation</td></tr>
+            <tr><td><strong>Git</strong></td><td>Local version control — commits, branches</td></tr>
+            <tr><td><strong>GitHub</strong></td><td>Remote repository hosting and code management</td></tr>
+            <tr><td><strong>GitHub Pages</strong></td><td>Free static website hosting / live deployment</td></tr>
+            <tr><td><strong>Google Fonts</strong></td><td>Inter &amp; Space Grotesk — typography</td></tr>
+            <tr><td><strong>Boxicons</strong></td><td>Icon library for UI icons (social, project, contact)</td></tr>
+            <tr><td><strong>VS Code</strong></td><td>Code editor used for development</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- 4. Website Features -->
+      <div class="section">
+        <div class="section-title"><span class="num">4</span> Website Features &amp; Sections</div>
+        <table class="info-table">
+          <tr><td>Home / Hero</td><td>Name, initials avatar, typing tagline animation, bio, CTA buttons, social links, particle background</td></tr>
+          <tr><td>About</td><td>Bio, enrollment info card, resume download button</td></tr>
+          <tr><td>Skills</td><td>7 technical skill progress bars, 8 tool chips, 7 soft skill chips</td></tr>
+          <tr><td>Projects</td><td>4 project cards with descriptions, tech tags, GitHub links and hover effects</td></tr>
+          <tr><td>Contact</td><td>Contact form (Name, Email, Message) with JS validation + social link icons</td></tr>
+          <tr><td>Footer</td><td>Nav links, social media icons, copyright notice</td></tr>
+          <tr><td>Responsive Design</td><td>Mobile-first layout; breakpoints at 600px and 900px for tablet &amp; desktop</td></tr>
+          <tr><td>Resume Button</td><td>Downloadable resume.pdf linked in Hero and About sections</td></tr>
+        </table>
+      </div>
+
+      <!-- 5. Projects -->
+      <div class="section">
+        <div class="section-title"><span class="num">5</span> Sample Projects Showcased</div>
+
+        <div class="project-card">
+          <h4>1. PROTEAM Gym Website</h4>
+          <p>A gym management website featuring membership plans, trainer information, class schedules, and database integration with an admin panel under development.</p>
+          <div class="tags">
+            <span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span>
+            <span class="tag">PHP</span><span class="tag">MySQL</span>
+          </div>
+          <div class="github-link">GitHub: <span>https://github.com/chiragjain017/proteam-gym-website</span></div>
+        </div>
+
+        <div class="project-card">
+          <h4>2. File Encryption &amp; Decryption Tool</h4>
+          <p>A Python application that encrypts and decrypts files using a key-based encryption workflow, ensuring data confidentiality and security.</p>
+          <div class="tags">
+            <span class="tag">Python</span><span class="tag">Cryptography</span><span class="tag">File I/O</span>
+          </div>
+          <div class="github-link">GitHub: <span>Repository to be added</span></div>
+        </div>
+
+        <div class="project-card">
+          <h4>3. Phishing URL Detector</h4>
+          <p>A Python-based project that analyzes URLs and identifies potentially suspicious or phishing links using predefined pattern-matching rules.</p>
+          <div class="tags">
+            <span class="tag">Python</span><span class="tag">Regex</span><span class="tag">Cyber Security</span>
+          </div>
+          <div class="github-link">GitHub: <span>https://github.com/chiragjain017/phishing-url-detector</span></div>
+        </div>
+
+        <div class="project-card">
+          <h4>4. Personal Portfolio Website</h4>
+          <p>A responsive personal website showcasing introduction, technical skills, projects, and contact information. Built and deployed using GitHub Pages for IT4048.</p>
+          <div class="tags">
+            <span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span>
+            <span class="tag">GitHub Pages</span>
+          </div>
+          <div class="github-link">GitHub: <span>https://github.com/chiragjain017/ChiragJain_PortfolioWebsite</span></div>
+        </div>
+      </div>
+
+      <!-- 6. Screenshots -->
+      <div class="section">
+        <div class="section-title"><span class="num">6</span> Screenshots of Website Pages</div>
+        <p style="font-size:9.5pt; color:#888; margin-bottom:10px;">
+          ⚠️ Replace the placeholder boxes below with actual screenshots after deployment. Use Ctrl+Shift+S (browser) or Snipping Tool.
+        </p>
+        <div class="screenshot-grid">
+          <div class="screenshot-box">
+            <div class="icon">🏠</div>
+            <strong>Home / Hero Section</strong>
+            <span style="color:#aaa">[ Paste screenshot here ]</span>
+          </div>
+          <div class="screenshot-box">
+            <div class="icon">👤</div>
+            <strong>About Section</strong>
+            <span style="color:#aaa">[ Paste screenshot here ]</span>
+          </div>
+          <div class="screenshot-box">
+            <div class="icon">💻</div>
+            <strong>Skills Section</strong>
+            <span style="color:#aaa">[ Paste screenshot here ]</span>
+          </div>
+          <div class="screenshot-box">
+            <div class="icon">🗂️</div>
+            <strong>Projects Section</strong>
+            <span style="color:#aaa">[ Paste screenshot here ]</span>
+          </div>
+          <div class="screenshot-box">
+            <div class="icon">📬</div>
+            <strong>Contact Section</strong>
+            <span style="color:#aaa">[ Paste screenshot here ]</span>
+          </div>
+          <div class="screenshot-box">
+            <div class="icon">📱</div>
+            <strong>Mobile View</strong>
+            <span style="color:#aaa">[ Paste screenshot here ]</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 7. Links -->
+      <div class="section">
+        <div class="section-title"><span class="num">7</span> GitHub Repository &amp; Live Links</div>
+        <div class="links-box">
+          <div class="link-row">
+            <span class="link-label">🔗 GitHub Repo</span>
+            <span class="link-url">https://github.com/chiragjain017/ChiragJain_PortfolioWebsite</span>
+          </div>
+          <div class="link-row">
+            <span class="link-label">🌐 Live Site</span>
+            <span class="link-url">https://chiragjain017.github.io/ChiragJain_PortfolioWebsite/</span>
+          </div>
+          <div class="link-row">
+            <span class="link-label">👤 GitHub Profile</span>
+            <span class="link-url">https://github.com/chiragjain017</span>
+          </div>
+          <div class="link-row">
+            <span class="link-label">💼 LinkedIn</span>
+            <span class="link-url">https://www.linkedin.com/in/chirag-jain</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 8. Declaration -->
+      <div class="section">
+        <div class="section-title"><span class="num">8</span> Declaration</div>
+        <div class="declaration">
+          I, <strong>Chirag Jain</strong> (Enrollment No. <strong>202503103510309</strong>), hereby declare that
+          this project submission is my own original work. The portfolio website has been independently designed and
+          developed. All resources used (fonts, icon libraries) are properly attributed. This submission has not been
+          copied or plagiarized from any other student or source.
+        </div>
+      </div>
+
+      <!-- Signature -->
+      <div class="signature">
+        <div class="signature-block">
+          <div class="signature-line"></div>
+          <div class="signature-label">Student Signature</div>
+          <div class="signature-label" style="font-weight:600; color:#1a1a2e;">Chirag Jain</div>
+        </div>
+        <div class="signature-block">
+          <div class="signature-line"></div>
+          <div class="signature-label">Date of Submission</div>
+          <div class="signature-label" style="font-weight:600; color:#1a1a2e;">October 2026</div>
+        </div>
+        <div class="signature-block">
+          <div class="signature-line"></div>
+          <div class="signature-label">Faculty / Examiner</div>
+        </div>
+      </div>
+
+    </div><!-- /body -->
+
+    <!-- ══════════ FOOTER ══════════ -->
+    <div class="report-footer">
+      <span>IT4048 — Version Control with Git and GitHub</span>
+      <span>Chirag Jain &nbsp;|&nbsp; Enrollment: 202503103510309</span>
+      <span>File: GitHub_202503103510309_ChiragJain.pdf</span>
+    </div>
+
+  </div><!-- /page -->
+</body>
+</html>
